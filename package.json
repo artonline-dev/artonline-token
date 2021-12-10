@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "develop": "truffle develop"
+    "develop": "truffle develop",
+    "test": "truffle test"
   },
   "dependencies": {
     "@klaytn/contracts": "^0.9.0",
