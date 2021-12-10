@@ -2,6 +2,16 @@
   "name": "art-online-core",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "develop": "truffle develop",
+    "migrate": "truffle migrate"
+  },
+  "dependencies": {
+    "@klaytn/contracts": "^0.9.0",
+    "@openzeppelin/contracts": "^4.4.0",
+    "caver-js": "^1.6.5",
+    "solc": "0.5.17"
+  },
   "devDependencies": {
     "truffle": "^5.4.23"
   }
