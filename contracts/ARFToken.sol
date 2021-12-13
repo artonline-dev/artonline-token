@@ -5,7 +5,7 @@ import "@klaytn/contracts/token/KIP7/KIP7Metadata.sol";
 import "@klaytn/contracts/token/KIP7/KIP7.sol";
 import "./interfaces/IERC1132.sol";
 
-contract ATCToken is KIP7, KIP7Metadata, IERC1132 {
+contract ARFToken is KIP7, KIP7Metadata, IERC1132 {
 
    /**
     * @dev Error messages for require statements
