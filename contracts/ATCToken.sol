@@ -1,10 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.5.0;
 
-import "@klaytn/contracts/token/KIP7/KIP7Token.sol";
+import "@klaytn/contracts/token/KIP7/KIP7Metadata.sol";
+import "@klaytn/contracts/token/KIP7/KIP7.sol";
 import "./interfaces/IERC1132.sol";
 
-contract ATCToken is KIP7Token, IERC1132 {
+contract ATCToken is KIP7, KIP7Metadata, IERC1132 {
 
    /**
     * @dev Error messages for require statements
@@ -13,7 +14,9 @@ contract ATCToken is KIP7Token, IERC1132 {
     string internal constant NOT_LOCKED = 'No tokens locked';
     string internal constant AMOUNT_ZERO = 'Amount can not be 0';
 
-    constructor(string memory name, string memory symbol, uint8 decimals, uint256 initialSupply) KIP7Token(name, symbol, decimals, initialSupply) public {}
+    constructor(string memory name, string memory symbol, uint8 decimals, uint256 initialSupply) KIP7Metadata(name, symbol, decimals) public {
+        _mint(msg.sender, initialSupply);
+    }
 
     /**
      * @dev Locks a specified amount of tokens against an address,
