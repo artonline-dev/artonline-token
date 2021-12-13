@@ -76,7 +76,29 @@ module.exports = {
       gasPrice: "25000000000",
     },
     mainnet: {
-      provider: () => new HDWalletProvider(privateKey, "https://your.cypress.en.url:8651"),
+      provider: () => {
+        const option = {
+          headers: [
+            {
+              name: "Authorization",
+              value:
+                "Basic " +
+                Buffer.from(credential.accessKeyId + ":" + credential.secretAccessKey).toString(
+                  "base64"
+                ),
+            },
+            { name: "x-chain-id", value: "8217" },
+          ],
+          keepAlive: false,
+        };
+        return new HDWalletProvider(
+          mnemonic,
+          new Caver.providers.HttpProvider(
+            "https://node-api.klaytnapi.com/v1/klaytn",
+            option
+          )
+        );
+      },
       network_id: '8217', //Klaytn mainnet's network id
       gas: '8500000',
       gasPrice: null
