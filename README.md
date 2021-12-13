@@ -22,3 +22,8 @@ const instance = await ATCToken.deployed();
 const balance = await instance.balanceOf(accounts[0]);
 balance.toNumber();
 ```
+
+# 참고자료
+
+#### Lockable Token
+https://github.com/nitika-goel/lockable-token/blob/master/contracts/LockableToken.sol

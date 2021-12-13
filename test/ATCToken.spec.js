@@ -1,6 +1,14 @@
 const ATCToken = artifacts.require("ATCToken");
 
 contract('ATCToken', (accounts) => {
+  it('name, symbol, decimals, totalSupply', async () => {
+    const atcTokenInstance = await ATCToken.deployed();
+
+    assert.equal(await atcTokenInstance.name(), 'Art Culture Token', "name is not Art Culture Token");
+    assert.equal(await atcTokenInstance.symbol(), 'ATC', "symbol is not ATC");
+    assert.equal(await atcTokenInstance.decimals(), 0, "decimals is not 0");
+    assert.equal(await atcTokenInstance.totalSupply(), 300000000, "totalSupply is not 300000000");
+  });
   it('should put 300000000 ATCToken in the first account', async () => {
     const atcTokenInstance = await ATCToken.deployed();
     const balance = await atcTokenInstance.balanceOf(accounts[0]);
