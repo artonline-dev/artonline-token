@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "compile": "truffle compile",
     "develop": "truffle develop",
     "test": "truffle test",
     "deploy:testnet": "truffle deploy --network testnet",
