@@ -7,7 +7,8 @@
     "develop": "truffle develop",
     "test": "truffle test",
     "deploy:testnet": "truffle deploy --network testnet",
-    "deploy:mainnet": "truffle deploy --network mainnet"
+    "deploy:mainnet": "truffle deploy --network mainnet",
+    "flatten": "truffle-flattener contracts/ARFToken.sol > build/ARFTokenFlat.sol"
   },
   "dependencies": {
     "@klaytn/contracts": "^0.9.0",
@@ -16,6 +17,7 @@
     "truffle-hdwallet-provider-klaytn": "^1.4.1"
   },
   "devDependencies": {
-    "truffle": "5.3.10"
+    "truffle": "5.3.10",
+    "truffle-flattener": "^1.5.0"
   }
 }
