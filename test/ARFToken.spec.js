@@ -63,7 +63,7 @@ contract('ARFToken', (accounts) => {
     assert.equal(accountOneEndingBalance, accountOneStartingBalance - amount, "Amount wasn't correctly taken from the sender");
     assert.equal(accountTwoEndingBalance, accountTwoStartingBalance, "Amount wasn't correctly locked");
 
-    sleep(1);
+    await sleep(1000);
 
     // unlock
     await arfTokenInstance.unlock(accountTwo);

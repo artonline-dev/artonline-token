@@ -14,7 +14,7 @@ contract ARFToken is KIP7, KIP7Metadata, IERC1132 {
     string internal constant NOT_LOCKED = 'No tokens locked';
     string internal constant AMOUNT_ZERO = 'Amount can not be 0';
 
-    constructor(string memory name, string memory symbol, uint8 decimals, uint256 initialSupply) KIP7Metadata(name, symbol, decimals) public {
+    constructor(string memory name, string memory symbol, uint8 decimals, uint256 initialSupply) KIP7() KIP7Metadata(name, symbol, decimals) public {
         _mint(msg.sender, initialSupply);
     }
 
