@@ -1,6 +1,6 @@
 {
   "name": "art-online-core",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "compile": "truffle compile",
@@ -8,7 +8,7 @@
     "test": "truffle test",
     "deploy:testnet": "truffle deploy --network testnet",
     "deploy:mainnet": "truffle deploy --network mainnet",
-    "flatten": "truffle-flattener contracts/ARFToken.sol > build/ARFTokenFlat.sol"
+    "flatten": "truffle-flattener contracts/ARTFToken.sol > build/ARTFTokenFlat.sol"
   },
   "dependencies": {
     "@klaytn/contracts": "^0.9.0",

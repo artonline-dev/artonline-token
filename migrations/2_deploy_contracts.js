@@ -1,6 +1,5 @@
-const ARFToken = artifacts.require("ARFToken");
+const ARTFToken = artifacts.require("ARTFToken");
 
 module.exports = async function (deployer, network, accounts) {
-  // mint
-  deployer.deploy(ARFToken, 'ARTRAP FLOW', 'ARF', 0, 300000000);
+  deployer.deploy(ARTFToken, 'ART ONLINE', 'ARTF', 18, '150000000000000000000000000');
 };

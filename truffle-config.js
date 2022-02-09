@@ -73,7 +73,7 @@ module.exports = {
       },
       network_id: "1001", //Klaytn baobab testnet's network id
       gas: "8500000",
-      gasPrice: "25000000000",
+      gasPrice: null
     },
     mainnet: {
       provider: () => {
