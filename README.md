@@ -18,7 +18,7 @@ migrate
 check balance
 ```
 const accounts = await web3.eth.getAccounts();
-const instance = await ATCToken.deployed();
+const instance = await ARTFToken.deployed();
 const balance = await instance.balanceOf(accounts[0]);
 balance.toNumber();
 ```

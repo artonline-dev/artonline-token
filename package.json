@@ -5,6 +5,7 @@
   "scripts": {
     "compile": "truffle compile",
     "develop": "truffle develop",
+    "console": "truffle console",
     "test": "truffle test",
     "deploy:testnet": "truffle deploy --network testnet",
     "deploy:mainnet": "truffle deploy --network mainnet",
