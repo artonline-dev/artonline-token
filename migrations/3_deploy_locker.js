@@ -1,5 +1,6 @@
 const ARTFToken = artifacts.require("ARTFToken");
+const TokenLocker = artifacts.require("TokenLocker");
 
 module.exports = async function (deployer, network, accounts) {
-  await deployer.deploy(ARTFToken, 'ART ONLINE', 'ARTF', 18, '150000000000000000000000000');
+  await deployer.deploy(TokenLocker, ARTFToken.address);
 };
