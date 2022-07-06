@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.5.0;
-pragma experimental ABIEncoderV2;
 
 import "@klaytn/contracts/token/KIP7/IKIP7.sol";
 
@@ -21,8 +20,8 @@ contract TokenLocker {
   event UnLocked(uint256 id, address receiver, uint256 amount);
   event Cancelled(uint256 id, address sender, uint256 amount);
 
-  mapping(uint256 => LockInfo) private _locks;
-  mapping(address => uint256) private _lockAmounts;
+  mapping(uint256 => LockInfo) public locks;
+  mapping(address => uint256) public lockAmounts;
 
   constructor(IKIP7 token) public {
       _token = token;
@@ -33,14 +32,6 @@ contract TokenLocker {
     return _lastId;
   }
 
-  function getLockedInfo(uint256 id) public view returns(LockInfo memory) {
-    return _locks[id];
-  }
-
-  function getLockedAmount(address receiver) public view returns(uint256) {
-    return _lockAmounts[receiver];
-  }
-
   function lock(address receiver, uint256 amount, uint256 releaseTime) public returns(uint256) {
     require(receiver != msg.sender, "Cannot transfer to self");
     require(block.timestamp < releaseTime, "Release Time must be future");
@@ -49,20 +40,20 @@ contract TokenLocker {
     _token.transferFrom(msg.sender, address(this), amount);
 
     uint256 newId = _nextId();
-    _locks[newId] = LockInfo({
+    locks[newId] = LockInfo({
       sender: msg.sender,
       receiver: receiver,
       amount: amount,
       releaseTime: releaseTime
     });
 
-    _lockAmounts[receiver] += amount;
+    lockAmounts[receiver] += amount;
 
     emit Locked(newId, receiver, amount);
   }
 
   function unlock(uint256 id) public {
-    LockInfo memory lockInfo = _locks[id];
+    LockInfo memory lockInfo = locks[id];
 
     require(lockInfo.receiver != address(0), "LockInfo is empty");
     require(block.timestamp >= lockInfo.releaseTime, "Release Time has not been reached");
@@ -75,7 +66,7 @@ contract TokenLocker {
   }
 
   function cancel(uint256 id) public {
-    LockInfo memory lockInfo = _locks[id];
+    LockInfo memory lockInfo = locks[id];
 
     require(lockInfo.receiver != address(0), "LockInfo is empty");
     require(lockInfo.receiver == msg.sender, "Only receiver can cancel lock");
@@ -88,9 +79,9 @@ contract TokenLocker {
   }
 
   function removeLock(uint256 id, address receiver, uint256 amount) private {
-    _lockAmounts[receiver] -= amount;
+    lockAmounts[receiver] -= amount;
 
-    delete _locks[id];
+    delete locks[id];
   }
 
 }

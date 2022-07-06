@@ -41,10 +41,10 @@ contract('TokenLocker', (accounts) => {
     assert.equal(fromWei(accountTwoEndingBalance), fromWei(accountTwoStartingBalance), "Amount wasn't correctly locked");
 
     // 잠긴 금액 확인
-    const lockInfo = await locker.getLockedInfo(lockId);
+    const lockInfo = await locker.locks(lockId);
     assert.equal(fromWei(lockAmount), fromWei(lockInfo.amount), "Locked amount is not correct");
 
-    const lockedAmount = await locker.getLockedAmount(accountTwo);
+    const lockedAmount = await locker.lockAmounts(accountTwo);
     assert.equal(fromWei(lockAmount), fromWei(lockedAmount), "Locked total amount is not correct");
   });
   it('cannot unlock before release time', async () => {
