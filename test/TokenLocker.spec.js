@@ -26,9 +26,7 @@ contract('TokenLocker', (accounts) => {
     const accountTwoStartingBalance = await artf.balanceOf(accountTwo);
 
      // Make transaction from first account to second.
-    
     const releaseTime = Math.floor(new Date().getTime() / 1000) + 10;  // After 10 seconds
-
     await artf.approve(locker.address, lockAmount);
     const lockReceipt = await locker.lock(accountTwo, lockAmount, releaseTime);
     const LockedEvent = lockReceipt.logs[0];
@@ -75,4 +73,31 @@ contract('TokenLocker', (accounts) => {
 
     assert.equal(fromWei(accountTwoEndingBalance), fromWei(accountTwoStartingBalance.add(lockAmount)), "Amount wasn't correctly locked");
   });
+  it('can cancel before release time', async () => {
+    const artf = await ARTFToken.deployed();
+    const locker = await TokenLocker.deployed();
+
+    const accountOne = accounts[0];
+    const accountTwo = accounts[1];
+
+    // lock
+    const releaseTime = Math.floor(new Date().getTime() / 1000) + 30;  // After 30 seconds
+    await artf.approve(locker.address, lockAmount);
+    const lockReceipt = await locker.lock(accountTwo, lockAmount, releaseTime);
+    const LockedEvent = lockReceipt.logs[0];
+
+    // Get initial balances of first and second account.
+    const accountOneStartingBalance = await artf.balanceOf(accountOne);
+    const accountTwoStartingBalance = await artf.balanceOf(accountTwo);
+
+    // cancel
+    await locker.cancel(LockedEvent.args.id, {from: accountTwo});
+
+    const accountOneEndingBalance = await artf.balanceOf(accountOne);
+    const accountTwoEndingBalance = await artf.balanceOf(accountTwo);
+
+    assert.equal(fromWei(accountOneEndingBalance), fromWei(accountOneStartingBalance.add(lockAmount)), "Amount wasn't correctly refunded");
+    assert.equal(fromWei(accountTwoEndingBalance), fromWei(accountTwoStartingBalance), "Amount wasn't correctly cancelled");
+  });
+
 });
