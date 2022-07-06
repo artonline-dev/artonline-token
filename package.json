@@ -7,6 +7,7 @@
     "develop": "truffle develop",
     "console": "truffle console",
     "test": "truffle test",
+    "deploy": "truffle deploy",
     "deploy:testnet": "truffle deploy --network testnet",
     "deploy:mainnet": "truffle deploy --network mainnet",
     "flatten": "truffle-flattener contracts/ARTFToken.sol > build/ARTFTokenFlat.sol"
