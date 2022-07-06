@@ -17,7 +17,7 @@ contract TokenLocker {
   }
 
   event Locked(uint256 id, address receiver, uint256 amount);
-  event UnLocked(uint256 id, address receiver, uint256 amount);
+  event Unlocked(uint256 id, address receiver, uint256 amount);
   event Cancelled(uint256 id, address sender, uint256 amount);
 
   mapping(uint256 => LockInfo) public locks;
@@ -62,7 +62,7 @@ contract TokenLocker {
 
     _removeLock(id, lockInfo.receiver, lockInfo.amount);
 
-    emit UnLocked(id, lockInfo.receiver, lockInfo.amount);
+    emit Unlocked(id, lockInfo.receiver, lockInfo.amount);
   }
 
   function cancel(uint256 id) public {
