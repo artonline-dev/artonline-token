@@ -60,7 +60,7 @@ contract TokenLocker {
 
     _token.safeTransfer(lockInfo.receiver, lockInfo.amount);
 
-    removeLock(id, lockInfo.receiver, lockInfo.amount);
+    _removeLock(id, lockInfo.receiver, lockInfo.amount);
 
     emit UnLocked(id, lockInfo.receiver, lockInfo.amount);
   }
@@ -73,15 +73,14 @@ contract TokenLocker {
 
     _token.safeTransfer(lockInfo.sender, lockInfo.amount);
 
-    removeLock(id, lockInfo.receiver, lockInfo.amount);
+    _removeLock(id, lockInfo.receiver, lockInfo.amount);
 
     emit Cancelled(id, lockInfo.sender, lockInfo.amount);
   }
 
-  function removeLock(uint256 id, address receiver, uint256 amount) private {
+  function _removeLock(uint256 id, address receiver, uint256 amount) private {
     lockAmounts[receiver] -= amount;
 
     delete locks[id];
   }
-
 }
