@@ -16,9 +16,9 @@ contract TokenLocker {
     uint256 releaseTime;
   }
 
-  event Locked(uint256 id, address receiver, uint256 amount);
-  event Unlocked(uint256 id, address receiver, uint256 amount);
-  event Cancelled(uint256 id, address sender, uint256 amount);
+  event Locked(uint256 indexed id, address indexed receiver, uint256 amount);
+  event Unlocked(uint256 indexed id, address indexed receiver, uint256 amount);
+  event Cancelled(uint256 indexed id, address indexed sender, uint256 amount);
 
   mapping(uint256 => LockInfo) public locks;
   mapping(address => uint256) public lockAmounts;
